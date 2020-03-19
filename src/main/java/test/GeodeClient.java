@@ -9,7 +9,7 @@ import org.apache.geode.cache.client.ClientRegionShortcut;
 
 public class GeodeClient {
 
-  private static final String LOCATOR = "instance-1.c.data-g2c.internal";
+  private static final String LOCATOR = "geode-vm-0.c.data-g2c.internal";
 
   private static final int LOCATOR_PORT = 10334;
 
