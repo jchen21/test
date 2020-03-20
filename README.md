@@ -12,11 +12,11 @@ Note: use the same `num` for the following steps. e.g. if `num` is 2, it will st
 
 `./gcp-build-geode.sh <num>`
 
-## Start the Apache Geode locator on GCP VM geode-vm-0:
+## Start the Apache Geode locator on GCP VM `geode-vm-0`:
 
 `./gcp-start-locator.sh`
 
-## Start the Apache Geode servers on GCP VMs geode-vm-1, 2, 3 etc:
+## Start the Apache Geode servers on GCP VMs `geode-vm-1`, `geode-vm-2` etc:
 
 `./gcp-start-servers.sh <num>`    
 
@@ -34,6 +34,7 @@ Note: use the same `num` for the following steps. e.g. if `num` is 2, it will st
 
 ## Restart the servers and recover the data from persistent disk
 
+You can time this step:
 `./gcp-start-servers.sh <num>`
 
 ## Delete all GCP VMs
