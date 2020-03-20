@@ -4,7 +4,8 @@ set -x
 
 vmlist=""
 space=" "
-for i in {0..2}; do
+for i in $(eval echo "{0..${1}}") 
+do
   vmlist=${vmlist}${space}geode-vm-${i}
 done
 echo ${vmlist}

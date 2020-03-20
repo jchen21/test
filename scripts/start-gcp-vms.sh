@@ -2,7 +2,7 @@
 
 set -x
 
-for i in {0..2}; do
+for i in $(eval echo "{0..${1}}"); do
   gcloud compute instances create geode-vm-${i} \
     --async \
     --boot-disk-size 200GB \
