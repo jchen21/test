@@ -2,4 +2,4 @@
 
 set -x
 
-~/geode/geode-assembly/build/install/apache-geode/bin/gfsh -e "create region --name=testRegion --type=PARTITION_PERSISTENT"
+~/geode/geode-assembly/build/install/apache-geode/bin/gfsh -e "connect --locator=geode-vm-0.c.data-g2c.internal[10334]" -e "create region --name=testRegion --type=PARTITION_PERSISTENT"
