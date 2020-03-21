@@ -1,6 +1,8 @@
 package test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.LongStream;
 
 import org.apache.geode.cache.Region;
@@ -19,10 +21,15 @@ public class GeodeClient {
   private static final long numEntries = 2_000_000_000;
 
   private void populateRegion(Region region) {
+    Map tmpMap = new HashMap();
     LongStream.range(0, numEntries).forEach(i -> {
+      if (i % 10_000 == 0) {
+        region.putAll(tmpMap);
+        tmpMap.clear();
+      }
       long key[] = new long[12];
       Arrays.fill(key, 0, key.length, i);
-      region.put(key, "value" + 0);
+      tmpMap.put(key, "value" + i);
     });
   }
 
