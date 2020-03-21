@@ -1,5 +1,6 @@
 package test;
 
+import java.util.Arrays;
 import java.util.stream.LongStream;
 
 import org.apache.geode.cache.Region;
@@ -15,10 +16,14 @@ public class GeodeClient {
 
   private static final String REGION_NAME = "testRegion";
 
-  private static final long numEntries = 1_000_000;
+  private static final long numEntries = 2_000_000_000;
 
   private void populateRegion(Region region) {
-    LongStream.range(0, numEntries).forEach(i -> region.put(i, "value" + 0));
+    LongStream.range(0, numEntries).forEach(i -> {
+      long key[] = new long[12];
+      Arrays.fill(key, 0, key.length, i);
+      region.put(key, "value" + 0);
+    });
   }
 
   private void doTest() {
