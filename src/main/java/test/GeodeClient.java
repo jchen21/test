@@ -20,17 +20,21 @@ public class GeodeClient {
 
   private static final long numEntries = 2_000_000_000;
 
+  private static final int bufferSize = 10_000;
+
   private void populateRegion(Region region) {
-    Map tmpMap = new HashMap();
+    Map tmpMap = new HashMap(bufferSize);
     LongStream.range(0, numEntries).forEach(i -> {
-      if (i % 10_000 == 0) {
+      if (i % bufferSize == 0) {
         region.putAll(tmpMap);
         tmpMap.clear();
       }
-      long key[] = new long[12];
-      Arrays.fill(key, 0, key.length, i);
-      tmpMap.put(key, "value" + i);
+      tmpMap.put("key12345678901234567890" + i, "value" + i);
     });
+
+    if (!tmpMap.isEmpty()) {
+      region.putAll(tmpMap);
+    }
   }
 
   private void doTest() {
