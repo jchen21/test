@@ -5,6 +5,13 @@ set -x
 sudo apt update
 sudo apt install -y openjdk-8-jdk
 
+java -version
+while [ $? -ne 0]  
+do
+  sudo apt update
+  sudo apt install -y openjdk-8-jdk
+done
+
 cd ~
 rm -rf geode
 git clone https://github.com/apache/geode.git
