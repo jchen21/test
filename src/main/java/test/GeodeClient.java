@@ -1,9 +1,9 @@
 package test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.LongStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
@@ -20,31 +20,31 @@ public class GeodeClient {
 
   private static final long numEntries = 2_000_000_000;
 
-  private static final int bufferSize = 10_000;
+  private static final int numThreads = 20;
 
-  private void populateRegion(Region region) {
-    Map tmpMap = new HashMap(bufferSize);
-    LongStream.range(0, numEntries).forEach(i -> {
-      if (i % bufferSize == 0) {
-        region.putAll(tmpMap);
-        tmpMap.clear();
-      }
-      tmpMap.put("key12345678901234567890" + i, "value" + i);
+  private void populateRegion(Region region) throws InterruptedException {
+    ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
+    long batchSize = numEntries / numThreads;
+    IntStream.range(0, numThreads).forEach(threadId -> {
+      long lowerBound = threadId * batchSize;
+      long upperBound = (threadId + 1) * batchSize;
+      executorService.submit(new Worker(threadId, region, lowerBound, upperBound));
     });
-
-    if (!tmpMap.isEmpty()) {
-      region.putAll(tmpMap);
+    executorService.shutdown();
+    boolean terminated =  executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+    if (!terminated) {
+      System.out.println("Warning: the timeout elapsed before termination.");
     }
   }
 
-  private void doTest() {
+  private void doTest() throws InterruptedException {
     ClientCacheFactory clientCacheFactory = new ClientCacheFactory();
     ClientCache clientCache = clientCacheFactory.addPoolLocator(LOCATOR, LOCATOR_PORT).create();
     Region clientRegion = clientCache.createClientRegionFactory(ClientRegionShortcut.PROXY).create(REGION_NAME);
     populateRegion(clientRegion);
   }
 
-  public static void main(String args[]) {
+  public static void main(String args[]) throws InterruptedException {
     GeodeClient geodeClient = new GeodeClient();
     geodeClient.doTest();
   }
