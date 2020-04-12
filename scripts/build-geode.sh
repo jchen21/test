@@ -14,8 +14,8 @@ done
 
 cd ~
 rm -rf geode
-#git clone https://github.com/jchen21/geode.git
-git clone https://github.com/apache/geode.git
+git clone https://github.com/jchen21/geode.git
+#git clone https://github.com/apache/geode.git
 
 cd geode
 #git checkout disk-recovery-perf
