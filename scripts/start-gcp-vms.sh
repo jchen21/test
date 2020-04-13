@@ -10,7 +10,7 @@ for i in $(eval echo "{0..${1}}"); do
     --image-family ubuntu-1804-lts \
     --image-project ubuntu-os-cloud \
     --machine-type e2-highmem-16 \
-    --private-network-ip 10.128.0.3${i} \
+    --private-network-ip 10.128.0.1${i} \
     --scopes compute-rw,storage-rw,service-management,service-control,logging-write,monitoring \
     --tags disk-loading
 done
