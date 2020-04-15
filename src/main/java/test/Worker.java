@@ -42,6 +42,6 @@ public class Worker implements Runnable {
       clientRegion.putAll(buffer);
     }
 
-    System.out.println("Worker " + workerId + " is done putting entries (" + lowerBound + ", " + upperBound + ").");
+    System.out.println("Worker " + workerId + " is done putting entries (" + lowerBound + ", " + upperBound + ") on region " + clientRegion.getName());
   }
 }
