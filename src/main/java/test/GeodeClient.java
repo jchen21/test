@@ -22,7 +22,7 @@ public class GeodeClient {
 
   private static final String REGION_NAME_2 = "testRegion2";
 
-  private static final long numEntries = 500_000_000;
+  private static final long numEntries = 100_000_000;
 
   private static final int numThreads = 20;
 
