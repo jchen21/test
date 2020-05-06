@@ -3,7 +3,7 @@
 set -x
 
 # create two disk stores
-~/geode/geode-assembly/build/install/apache-geode/bin/gfsh -e "connect --locator=geode-vm-0.c.data-g2c.internal[10334]" -e "create disk-store --name=diskstore1 --dir=diskstore1" -e "create disk-store --name=diskstore2 --dir=/mnt/disk"
+~/geode/geode-assembly/build/install/apache-geode/bin/gfsh -e "connect --locator=geode-vm-0.c.data-g2c.internal[10334]" -e "create disk-store --name=diskstore1 --dir=diskstore1" -e "create disk-store --name=diskstore2 --dir=diskstore2"
 #~/workspace/geode/geode-assembly/build/install/apache-geode/bin/gfsh -e "connect --locator=localhost[10334]" -e "create disk-store --name=diskstore1 --dir=diskstore1" -e "create disk-store --name=diskstore2 --dir=diskstore2"
 
 # create two regions using different disk stores
