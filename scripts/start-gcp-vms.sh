@@ -6,7 +6,7 @@ for i in $(eval echo "{0..${1}}"); do
   gcloud compute instances create geode-vm-${i} \
     --async \
     --boot-disk-size 200GB \
-    --boot-disk-type pd-standard \
+    --boot-disk-type pd-ssd \
     --image-family ubuntu-1804-lts \
     --image-project ubuntu-os-cloud \
     --local-ssd device-name=local-ssd-${i},interface=NVME \
