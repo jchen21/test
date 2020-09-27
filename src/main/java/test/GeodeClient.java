@@ -84,6 +84,6 @@ public class GeodeClient {
 
   public static void main(String args[]) throws InterruptedException {
     GeodeClient geodeClient = new GeodeClient();
-    geodeClient.doTest();
+    geodeClient.doTest2();
   }
 }
