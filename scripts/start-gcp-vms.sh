@@ -10,7 +10,7 @@ for i in $(eval echo "{0..${1}}"); do
     --image-family ubuntu-1804-lts \
     --image-project ubuntu-os-cloud \
     --local-ssd device-name=local-ssd-${i},interface=NVME \
-    --machine-type n1-highmem-16 \
+    --machine-type n1-highmem-32 \
     --private-network-ip 10.128.0.1${i} \
     --scopes compute-rw,storage-rw,service-management,service-control,logging-write,monitoring \
     --tags disk-loading
