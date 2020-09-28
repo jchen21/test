@@ -19,8 +19,8 @@ git clone https://github.com/apache/geode.git
 
 cd geode
 #git checkout disk-recovery-perf-2
-#git checkout rel/v1.12.0
-git checkout 733525f993e6006fb9701eb530cd87b418b05939
+git checkout develop
+#git checkout 733525f993e6006fb9701eb530cd87b418b05939
 ./gradlew clean
 ./gradlew build -x test
 
